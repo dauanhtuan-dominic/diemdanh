@@ -122,11 +122,8 @@ export class CustomerComponent implements OnInit {
   // }
 
   DeleteItem(id:string){
-    var formData: any = new FormData();
-    formData.append('id', this.formSearch.patchValue({'id':id}))
-    console.log('formdata',formData);
     
-    this.customerService.delete(formData).subscribe(data=>{
+    this.customerService.delete(id).subscribe(data=>{
       console.log('thành công', data);
       this.getDataLists();
     })

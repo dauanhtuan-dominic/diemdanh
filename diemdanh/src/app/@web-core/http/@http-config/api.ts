@@ -11,7 +11,7 @@ export const APICONFIG = {
   CUSTOMER: {
     GET: `/api/get.php`,
     CREATE: `/api/insert.php`,
-    DELETE: (id) => `/api/delete.php`,
+    DELETE: (id) => `/api/delete.php?id=${id}`,
     
   },
   EMPLOYEE: {
