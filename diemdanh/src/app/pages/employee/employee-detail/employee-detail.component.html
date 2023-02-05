@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h4 *ngIf="!this.id" class="modal-title">Thêm tài khoản</h4>
+    <h4 *ngIf="this.id" class="modal-title">Description tài khoản</h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="usr">Username:</label>
+            <input type="text" formControlName="fullname" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.fullname.invalid && f.fullname.dirty && !f.fullname.errors.required">
+                Username không hợp lệ
+            </span>
+            <span *ngIf="f.fullname.errors?.required && f.fullname.touched">
+                Please Enter Username
+            </span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="usr">Email:</label>
+            <input type="text" formControlName="email" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.email.invalid && f.email.dirty && !f.email.errors.required">
+                Email không hợp lệ
+            </span>
+            <span *ngIf="f.email.errors?.required && f.email.touched">
+                Please Enter email
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Role:</label>
+            <select class="form-control" formControlName="role">
+                <option *ngFor="let item of permission" value="{{item.value}}">{{item.valueView}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Phone Number:</label>
+            <input type="tel" formControlName="phone_number" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.phone_number.invalid && f.phone_number.dirty && !f.phone_number.errors.required">
+                Phone Number không hợp lệ
+            </span>
+            <span *ngIf="f.phone_number.errors?.required && f.phone_number.touched">
+                Please Enter Phone Number
+            </span>
+        </div>
+
+        <div class="form-group" *ngIf="!this.id">
+            <label for="usr">Mật khẩu:</label>
+            <input type="text" formControlName="password" class="form-control">
+        </div>
+        <div class="form-group" *ngIf="!this.id">
+            <label for="usr">Xác nhận mật khẩu:</label>
+            <input type="text" formControlName="password_confirmation" class="form-control">
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel()">Close</button>
+    <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="createItem()">Create</button>
+    <button *ngIf="this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="editItem()">Save</button>
+</div>

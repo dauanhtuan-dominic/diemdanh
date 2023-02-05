@@ -1,0 +1,24 @@
+.searchContainer {
+    position: relative;
+    margin-bottom: 20px;
+    input {
+      width: 100%;
+      padding-left: 30px;
+    }
+    .icon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+  
+
+  // .icon-action {
+  //   font-size: 15px;
+  //   margin: 0px 5px;
+  // }

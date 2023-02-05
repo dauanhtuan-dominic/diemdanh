@@ -1,0 +1,41 @@
+.rwd-table {
+    width: 100%;
+    margin: auto;
+    background-color: #34495E;
+    border-radius: 5px;
+    tr {
+      th {
+        padding: 10px;
+        color: #dd5;
+      }
+      td {
+        padding: 10px;
+        color: seashell;
+      }
+      .stt {
+        text-align: center;
+      }
+      .amount {
+        text-align: center;
+      }
+    }
+  }
+
+.flex-row {
+  display: flex;
+}
+.choose-order-detail{
+  .amount-title{
+    padding: 15px 0;
+    padding-right: 20px;
+  }
+  
+  .btn-add{
+    margin-top: 15px;
+    background: rgb(89, 219, 89);
+    padding: 10px 35px;
+    border: none;
+    box-shadow: 3px 5px 2px rgb(189, 189, 65);
+    border-radius: 15px;
+  }
+}

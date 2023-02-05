@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <h4 *ngIf="!this.id" class="modal-title">Thêm sản phẩm</h4>
+    <h4 *ngIf="this.id" class="modal-title">Description sản phẩm</h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="usr">Product Name:</label>
+            <input type="text" formControlName="name" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <!-- <span
+                    *ngIf="f.name.invalid && f.name.dirty && !f.name.errors.required">
+                    Username invalid
+                </span> -->
+            <span *ngIf="f.name.errors?.required && f.name.touched">
+                Product Name không được để trống
+            </span>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <label for="usr">Price:</label>
+            <input type="text" formControlName="price" (keyup)="currency()" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.price.errors?.required && f.price.touched">
+                Please Enter Price
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="usr">Description:</label>
+            <input type="text" formControlName="description" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Thumb image:</label>
+            <input type="file" (change)="fileChangeEvent($event, 'thumb_image')" class="form-control" />
+            <image-cropper [imageChangedEvent]="imageThumb.imageChanged" [maintainAspectRatio]="true"
+                [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event, 'thumb_image')"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <img *ngIf="imageThumb.image" style="width: 200px;" [src]="imageThumb.image" />
+            <button type="button" class="btn btn-default btn-control" (click)="upload('thumb_image');">Upload</button>
+            <div class="img-thumb">
+                <!-- <i class="fa fa-times-circle-o" aria-hidden="true" (click)="removeThumbnail()" ></i> -->
+               
+                <img *ngIf="this.form.value.thumb_image" style="width: 100px;"
+                    [src]="this.form.value.thumb_image.url" />
+            </div>
+            <!-- <img *ngFor="let item of form.value.photos" style="width: 200px;" [src]="item.url" /> -->
+        </div>
+        <div class="form-group">
+            <label for="usr">Photos:</label>
+            <input type="file" (change)="fileChangeEvent($event, 'photos')" class="form-control" />
+            <image-cropper [imageChangedEvent]="imagePhoto.imageChanged" [maintainAspectRatio]="true"
+                [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event, 'photos')"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <img *ngIf="imagePhoto.image" style="width: 200px;" [src]="imagePhoto.image" />
+            <button type="button" class="btn btn-default btn-control" (click)="upload('photos');">Upload</button>
+            <div class="list-image">
+                <div class="image-item" *ngFor="let item of form.value.photos">
+                    
+                    <img style="width: 100px;" [src]="item.url" />
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel();">Close</button>
+    <!-- <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="create()">Create</button> -->
+    <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" (click)="create()">Create</button>
+    <button *ngIf="this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="editItem()">Save</button>
+</div>

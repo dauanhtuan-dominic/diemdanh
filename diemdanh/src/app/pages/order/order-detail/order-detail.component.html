@@ -1,0 +1,117 @@
+<div class="modal-header">
+    <h4 *ngIf="this.id" class="modal-title">Description Order</h4>
+    <h4 *ngIf="!this.id" class="modal-title">Create Order</h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" *ngIf="this.id">
+        <div class="form-group">
+            <label for="usr">Customer Name:</label>
+            <input type="text" formControlName="fullname" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Customer Name:</label>
+            <input type="text" formControlName="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Order ID:</label>
+            <input type="text" formControlName="code" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Phone Number:</label>
+            <input type="text" formControlName="phone_number" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Order Info:</label>
+            <table class="rwd-table">
+                <tr>
+                    <th class="stt">STT</th>
+                    <th>Product Name</th>
+                    <th class="amount">Amount</th>
+                </tr>
+                <tr *ngFor="let item of order_details; let i = index">
+                    <td class="stt">{{i + 1}}</td>
+                    <td>{{item.name}}</td>
+                    <td class="amount">{{item.amount}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- <div class="form-group">
+            <label for="usr">Price:</label>
+            <input type="text" formControlName="price" class="form-control">
+        </div> -->
+
+        <div class="form-group">
+            <label for="usr">Order Status:</label>
+            <select class="form-control" formControlName="status">
+                <option *ngFor="let item of arrStatusOrder" value="{{item.value}}">{{item.valueView}}</option>
+            </select>
+        </div>
+        <!-- <div class="form-group">
+            <button type="button" class="btn btn-info btn-control" (click)="showMap()">Mở google map chỉ đường</button>
+        </div> -->
+    </form>
+    <!-- CREATE -->
+    <form [formGroup]="form" *ngIf="!this.id">
+        <div class="form-group">
+            <label for="usr">Customer:</label>
+            <ng-select [items]="arrCustomer" bindLabel="fullname" formControlName="user_id"
+                notFoundText="{{notFoundText}}" [loading]="loadingCustomer" [virtualScroll]="true"
+                (focus)="getListCustomer()" (keyup)="searchCustomer($event.target.value)"
+                (scrollToEnd)="scrollEnd('customer')" (change)="show()" (clear)="removeInput('customer')">
+            </ng-select>
+
+
+
+        </div>
+        <div class="form-group">
+            <label for="usr">Order ID:</label>
+            <input type="text" formControlName="code" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Tracking:</label>
+            <input type="text" formControlName="id_tracking" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Products:</label>
+            <ng-select [items]="arrProduct" bindLabel="name" formControlName="id_product"
+                notFoundText="{{notFoundText}}" [loading]="loadingCustomer" [virtualScroll]="true"
+                (focus)="getListProduct()" (keyup)="searchProductGroup($event.target.value)"
+                (scrollToEnd)="scrollEnd('product_group')" (change)="show()" (clear)="removeInput('product_group')">
+            </ng-select>
+            <div *ngIf="activeAmount" class="choose-order-detail">
+                <label class="amount-title" for="">Amount </label>
+                <input class="amount-value" (keyup)="currency()" type="text" formControlName="amount">
+                <h3>Danh sách sản phẩm</h3>
+                <table class="rwd-table">
+                    <tr>
+                        <th class="stt">STT</th>
+                        <th>Product Name</th>
+                        <th class="amount">Amount</th>
+                    </tr>
+                    <tr *ngFor="let item of form.value.order_details; let i = index">
+                        <td class="stt">{{i + 1}}</td>
+                        <td>{{item.name.name}}</td>
+                        <td class="amount">{{item.amount}}</td>
+                    </tr>
+                </table>
+                <button class="btn-add" (click)="upload()">OK</button>
+            </div>
+
+
+        </div>
+        <!-- <div class="form-group">
+            <label for="usr">Mã Tracking:</label>
+            <input type="text" formControlName="code" class="form-control">
+        </div> -->
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel()">Close</button>
+    <button *ngIf="this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="editItem()">Save</button>
+    <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" 
+        (click)="createItem()">Create</button>
+</div>

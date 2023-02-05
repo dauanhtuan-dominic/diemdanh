@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+.nav-warpper {
+    position: fixed;
+    z-index: 100;
+    height: 87px;
+    background-color: aqua;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+    align-content: stretch;
+    background-color: hsla(0,0%,100%,.96);
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    transition: width 0.3s;
+    right: 0px;
+    .left {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        .status-sidebar {
+        margin: 0px 0px 0px 20px;
+            i {
+                border-radius: 50%;
+                background-color: snow;
+                cursor: pointer;
+            }
+            i:hover {
+                background-color: steelblue;
+            }
+            .fa-bars {
+                padding: 8px 10px;
+                border: 1px solid #888;
+            }
+            .fa-ellipsis-v {
+                padding: 8px 16px;
+                border: 1px solid #888;
+            }
+        }
+          .header-page {
+            margin: 0px 20px;
+             span {
+                text-transform: uppercase;
+                font-size: 14px;
+                color: #3c4e4e;
+                font-weight: 500;
+               
+            }
+        }
+    }
+    .middle {
+
+    }
+    .right {
+        margin: 0px 20px 0px 10px;
+        i {
+            cursor: pointer;
+        }
+    }
+}
+
+.icon-button {
+    font-size: large;
+}
+:host ::ng-deep .mat-typography{
+    font-family: 'DM Sans', sans-serif!important;
+  }

@@ -1,0 +1,85 @@
+.searchContainer {
+  position: relative;
+  margin-bottom: 20px;
+  input {
+    width: 100%;
+    padding-left: 30px;
+  }
+  .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+.list-prices{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// .icon-action {
+//   font-size: 15px;
+//   margin: 0px 5px;
+// }
+.list-prices {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+:host ::ng-deep .datatable-body-cell {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.show {
+  display: block;
+}
+.dropdown-content {
+  // display: none
+  position: relative;
+  
+  .drop-item {
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 0 5px;
+    img {
+      width: 20%;
+      height: 100%;
+    }
+    p {
+      margin: 0 10px;
+      font-size: 16px;
+    }
+  }
+}
+.checkbox {
+  border: 1px solid red !important;
+}
+:host ::ng-deep .datatable-body-cell-label {
+  // margin-left: 40px !important;
+}
+:host ::ng-deep .datatable-checkbox input[type="checkbox"]::after {
+  background: burlywood;
+}
+:host ::ng-deep .datatable-checkbox input[type="checkbox"]:checked {
+  &::before {
+    border-color: white !important;
+  }
+}
+.btn-danger:disabled {
+  background: gray !important;
+  border-color: gray !important;
+}
+.img-pdf{
+  margin-right: 10px;
+}

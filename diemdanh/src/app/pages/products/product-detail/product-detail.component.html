@@ -1,0 +1,142 @@
+<div class="modal-header">
+    <h4 *ngIf="!this.id" class="modal-title">Add product</h4>
+    <h4 *ngIf="this.id" class="modal-title">Product detail</h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="usr">Code</label>
+            <input type="text" formControlName="code" (keyup)="currency()" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Product group:</label>
+            <ng-select [items]="arrProductGroups" bindLabel="name" bindValue="id" formControlName="product_group_id"
+                notFoundText="{{notFoundText}}" [loading]="loadingProductGroup" [virtualScroll]="true"
+                (keyup)="searchProductGroup($event.target.value)" (scrollToEnd)="scrollEnd('product_group')"
+                (clear)="removeInput('product_group')">
+            </ng-select>
+        </div>
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" formControlName="name" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <!-- <span
+                    *ngIf="f.name.invalid && f.name.dirty && !f.name.errors.required">
+                    Username invalid
+                </span> -->
+            <span *ngIf="f.name.errors?.required && f.name.touched">
+                Name not empty
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Base Price</label>
+            <input type="text" formControlName="base_price" (keyup)="currency()" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Standard Price</label>
+            <input type="text" formControlName="standard_price" (keyup)="currency()" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Premium Price</label>
+            <input type="text" formControlName="premium_price" (keyup)="currency()" class="form-control">
+        </div>
+        
+
+
+        <!-- <div class="text-arlet">
+            <span *ngIf="f.pricing_services[0].price.errors?.required && f.pricing_services[0].price.touched">
+                Price not empty
+            </span>
+        </div> -->
+        <!-- <div class="form-group">
+            <label for="usr">Price:</label>
+            <input type="text" formControlName="pricing_services[1].price" (keyup)="currency()" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.price.errors?.required && f.price.touched">
+                Price not empty
+            </span>
+        </div> -->
+        <p>Catalogue</p>
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" formControlName="catalogue_name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Url:</label>
+            <input type="text" formControlName="catalogue_url" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Short description:</label>
+            <ckeditor formControlName="short_description"></ckeditor>
+        </div>
+        <div class="text-arlet">
+            <!-- <span
+                            *ngIf="f.name.invalid && f.name.dirty && !f.name.errors.required">
+                            Username invalid
+                        </span> -->
+            <span *ngIf="f.short_description.errors?.required && f.short_description.touched">
+                Short Description not empty
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="usr">Description:</label>
+            <ckeditor formControlName="description"></ckeditor>
+        </div>
+        <div class="text-arlet">
+
+            <span *ngIf="f.description.errors?.required && f.description.touched">
+                Description not empty
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Thumb image Name:</label>
+            <input type="text" formControlName="thumb_image_name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Thumb image:</label>
+            <input type="file" (change)="fileChangeEvent($event, 'thumb_image')" class="form-control" />
+            <image-cropper [imageChangedEvent]="imageThumb.imageChanged" [maintainAspectRatio]="true"
+                [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event, 'thumb_image')"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <img *ngIf="imageThumb.image" style="width: 200px;" [src]="imageThumb.image" />
+            <button type="button" class="btn btn-default btn-control" (click)="upload('thumb_image')">Upload</button>
+            <div class="img-thumb">
+                <!-- <i class="fa fa-times-circle-o" aria-hidden="true" (click)="removeThumbnail()" ></i> -->
+                <img *ngIf="this.form.value.thumb_image_url" style="width: 100px;"
+                    [src]="this.form.value.thumb_image_url" />
+            </div>
+            <!-- <img *ngFor="let item of form.value.photos" style="width: 200px;" [src]="item.url" /> -->
+        </div>
+        <!-- <div class="form-group">
+            <label for="usr">Photos:</label>
+            <input type="file" (change)="fileChangeEvent($event, 'photos')" class="form-control" />
+            <image-cropper [imageChangedEvent]="imagePhoto.imageChanged" [maintainAspectRatio]="true"
+                [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event, 'photos')"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <img *ngIf="imagePhoto.image" style="width: 200px;" [src]="imagePhoto.image" />
+            <button type="button" class="btn btn-default btn-control" (click)="upload('photos');">Upload</button>
+            <div class="list-image">
+                <div class="image-item" *ngFor="let item of form.value.photos">
+                    <i class="fa fa-times-circle-o" style="cursor: pointer;" aria-hidden="true"
+                        (click)="removePhoto(item)"></i>
+                    <img style="width: 100px;" [src]="item.url" />
+                </div>
+            </div>
+        </div> -->
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel();">Close</button>
+    <!-- <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="create()">Create</button> -->
+    <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" (click)="createItem()">Create</button>
+    <button *ngIf="this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="editItem()">Save</button>
+</div>

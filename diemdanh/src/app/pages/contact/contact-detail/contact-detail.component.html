@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4  class="modal-title">Content</h4>
+    
+</div>
+<div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="usr">Customer Name:</label>
+            <input type="text" formControlName="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Content:</label>
+            <textarea type="text" formControlName="content" class="form-control"></textarea>
+        </div>
+        
+
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel()">Close</button>
+    
+</div>

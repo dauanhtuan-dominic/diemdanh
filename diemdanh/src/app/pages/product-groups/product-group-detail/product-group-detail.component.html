@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 *ngIf="!this.id" class="modal-title">Create category</h4>
+    <h4 *ngIf="this.id" class="modal-title">Category detail</h4>
+</div>
+<div class="modal-body">
+    
+    <form [formGroup]="form" >
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" formControlName="name" class="form-control">
+        </div>
+        <div class="text-arlet">
+                <span *ngIf="f.name.errors?.required && f.name.touched">
+                    Group Product Name không được để trống
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="usr">Position:</label>
+                <input type="text" formControlName="position" class="form-control">
+            </div>
+        <div class="form-group">
+            <label for="usr">Description:</label>
+            <input type="text" formControlName="description" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="usr">Thumb image:</label>
+            <input type="file" (change)="fileChangeEvent($event)" class="form-control" />
+            <image-cropper [imageChangedEvent]="imageThumb.imageChanged" [maintainAspectRatio]="true"
+                [aspectRatio]="1/1" format="png" (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <img *ngIf="imageThumb.image" style="width: 200px;" [src]="imageThumb.image" />
+            <button type="button" class="btn btn-default btn-control" (click)="upload();">Upload</button>
+            <div class="img-thumb">
+                <!-- <i class="fa fa-times-circle-o" aria-hidden="true" (click)="removeThumbnail()" ></i> -->
+                <img *ngIf="this.form.value.thumb_image" style="width: 100px;"
+                    [src]="this.form.value.thumb_image.url" />
+            </div>
+            <!-- <img *ngFor="let item of form.value.photos" style="width: 200px;" [src]="item.url" /> -->
+        </div>
+        
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel();">Close</button>
+    <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="createItem()">Create</button>
+    <button *ngIf="this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="editItem()">Save</button>
+</div>

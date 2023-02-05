@@ -1,0 +1,23 @@
+<form [formGroup]='form' (ngSubmit)="login()">
+    <div class="cont">
+        <div class="form sign-in">
+            <h2>Trang quản trị</h2>
+            <label>
+                <span>Email</span>
+                <input type="email" formControlName="email" />
+            </label>
+            <label>
+                <span>Password</span>
+                <input type="password" formControlName="password" />
+            </label>
+            <button type="submit" class="submit">Đăng nhập</button>
+        </div>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img__text m--up">
+                        <img style="width: 200px; height: 200px;" src="assets/images/restaurant.svg" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

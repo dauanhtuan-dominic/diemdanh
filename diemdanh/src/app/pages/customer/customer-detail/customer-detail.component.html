@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <h4 *ngIf="!this.id" class="modal-title">Thêm học sinh</h4>
+    <h4 *ngIf="this.id" class="modal-title">Chi tiết học sinh</h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="usr">Hình ảnh học viên:</label> <br/>
+            <input type="file" (change)="uploadFile($event)">
+            <img style=" padding-top: 22px;" src="{{imgAvatar}}"/>
+        </div>
+        <div class="form-group">
+            <label for="usr">Tên thánh:</label>
+            <input type="text" formControlName="namegod" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.namegod.invalid && f.namegod.dirty && !f.namegod.errors.required">
+                Tên thánh không được để trống
+            </span>
+            <span *ngIf="f.namegod.errors?.required && f.namegod.touched">
+                Tên thánh không được để trống
+            </span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="usr">Họ và Tên:</label>
+            <input type="text" formControlName="fullname" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.fullname.invalid && f.fullname.dirty && !f.fullname.errors.required">
+                Họ và tên không được để trống
+            </span>
+            <span *ngIf="f.fullname.errors?.required && f.fullname.touched">
+                Họ và tên không được để trống
+            </span>
+        </div>
+
+        <div class="form-group date">
+            <label for="usr">Ngày sinh:</label>
+            <input style="height: 35px;
+            width: 100%;
+            padding-left: 16px;
+            font-size: 19px;" formControlName="birthday" type="date">
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Lớp học:</label>
+            <select  style="height: 35px;
+            width: 100%;
+            padding-left: 16px;
+            font-size: 19px;" formControlName="Classes">
+                <option [ngValue]="null" disabled>Chọn lớp học</option>
+                <option *ngFor="let class of Classes" [ngValue]="class.name">{{class.name}}</option>
+            </select>        
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.Classes.invalid && f.Classes.dirty && !f.Classes.errors.required">
+                Lớp học không được để trống
+            </span>
+            <span *ngIf="f.Classes.errors?.required && f.Classes.touched">
+                Lớp học không được để trống
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Giáo xóm:</label>
+            <select  style="height: 35px;
+            width: 100%; 
+            padding-left: 16px;
+            font-size: 19px;" formControlName="groupgod">
+                <option [ngValue]="null" disabled>Chọn giáo xóm</option>
+                <option *ngFor="let groupgo of groupgod" [ngValue]="groupgo.name">{{groupgo.name}}</option>
+            </select>        
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Họ tên Cha Hoặc Mẹ:</label>
+            <input type="text" formControlName="parent" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.parent.invalid && f.parent.dirty && !f.parent.errors.required">
+                Họ tên Cha Hoặc Mẹ không được để trống
+            </span>
+            <span *ngIf="f.parent.errors?.required && f.parent.touched">
+                Họ tên Cha Hoặc Mẹ không được để trống
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="usr">Địa chỉ:</label>
+            <input type="text" formControlName="address" class="form-control">
+        </div>
+        <div class="text-arlet">
+            <span *ngIf="f.address.invalid && f.address.dirty && !f.address.errors.required">
+                Địa chỉ không được để trống
+            </span>
+            <span *ngIf="f.address.errors?.required && f.address.touched">
+                Địa chỉ không được để trống
+            </span>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-control" (click)="cancel()">Hủy</button>
+    <button *ngIf="!this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="createItem()">Thêm</button>
+    <button *ngIf="this.id" type="button" class="btn btn-primary btn-control" [disabled]="!form.valid"
+        (click)="editItem()">Lưu lại</button>
+</div>
